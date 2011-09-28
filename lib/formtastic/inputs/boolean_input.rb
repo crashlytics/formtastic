@@ -87,8 +87,13 @@ module Formtastic
         {:name => "#{object_name}[#{method}]"}.merge(super)
       end
 
+      def raw_value
+				return options[:value].call(object || method) unless options[:value].nil?
+				return object.send(method) if object
+			end
+			
       def checked?
-        object && ActionView::Helpers::InstanceTag.check_box_checked?(object.send(method), checked_value)
+        ActionView::Helpers::InstanceTag.check_box_checked?(raw_value, checked_value)
       end
 
     end

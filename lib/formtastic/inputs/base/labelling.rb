@@ -41,7 +41,7 @@ module Formtastic
         end
 
         def localized_label
-          localized_string(method, label_from_options || method, :label)
+          localized_string(method, label_from_options, :label)
         end
         
         def render_label?
